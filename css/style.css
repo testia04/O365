@@ -1,16 +1,520 @@
 
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BASE */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 10px;
 }
 
-h1 {
-    color: #003366;
+/* WRAPPER GLOBAL – ÉTIRE TOUT LE SITE */
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-button {
-    padding: 10px 15px;
+/* ===== HERO BANNER (section du haut) ===== */
+.hero-banner {
+    background: linear-gradient(135deg, #687ae8 0%, #7b6bdc 100%);
+    padding: 80px 40px;
+    border-radius: 35px;
+    max-width: 1600px;
+    margin: 0 auto 20px auto;   /* espace bas réduit */
+    text-align: center;
+    color: white !important;
+}
+
+.hero-banner h1,
+
+.hero-banner p {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.3vw, 1.45rem);
+    letter-spacing: 0.3px;
+
+    /* Ombre plus douce et plus large */
+    text-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.30),
+        0 0 22px rgba(255, 255, 255, 0.30);
+
+    /* Effets d'apparition + scintillement */
+    animation: fadeIn 1s ease forwards, glowPulse 3.5s ease-in-out infinite;
+    opacity: 0;
+}
+
+/* Apparition en fondu */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Effet léger scintillant / respirant (glow) */
+@keyframes glowPulse {
+    0%   { text-shadow: 0 4px 12px rgba(0,0,0,0.30), 0 0 18px rgba(255,255,255,0.20); }
+    50%  { text-shadow: 0 4px 14px rgba(0,0,0,0.40), 0 0 28px rgba(255,255,255,0.55); }
+    100% { text-shadow: 0 4px 12px rgba(0,0,0,0.30), 0 0 18px rgba(255,255,255,0.20); }
+}
+
+/* ===== SECTION BLANCHE ===== */
+.benefits-banner {
+    background: white;
+    border-radius: 40px;
+    padding: 60px 50px;
+    margin: 10px auto 30px auto;
+    max-width: 1600px;            /* même largeur que la bannière */
+    width: 100%;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   TITRE SECTION — VERSION PREMIUM
+   ========================================================= */
+.benefits-banner h2 {
+    text-align: center;
+    font-size: 2.9em;
+    font-weight: 800;
+    margin-bottom: 50px;
+
+    /* Texte */
+    color: transparent;
+    background: linear-gradient(
+        90deg,
+        #6B78E5,
+        #8f9bff,
+        #6B78E5
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    /* Profondeur */
+    text-shadow: 
+        0 4px 12px rgba(107, 120, 229, 0.25),
+        0 10px 30px rgba(107, 120, 229, 0.15);
+
+    /* Animation */
+    animation: shimmerTitle 3.5s ease-in-out infinite;
+}
+@keyframes shimmerTitle {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+
+/* ===== GRILLE DES 4 BLOCS ===== */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);   /* 4 colonnes fixes */
+    gap: 35px;
+    padding: 0 40px;
+}
+
+/* ===== CARTES ===== */
+.benefit-item {
+    background: linear-gradient(180deg, #eef2ff 0%, #e3e9f7 100%);
+    border-radius: 22px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 20px 40px rgba(102,126,234,0.15);
+    transition: 0.3s ease;
+}
+
+.benefit-item .icon {
+    font-size: 2.8em;
+    display: block;
+    margin-bottom: 18px;
+}
+
+.benefit-item h4 {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #6B78E5;
+    margin-bottom: 8px;
+}
+
+.benefit-item p {
+    font-size: 1em;
+    color: #555;
+    opacity: 0.85;
+}
+
+/* ===== CARTES APPLIS (Outlook / Word / Excel) ===== */
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important; /* GARANTIT 3 COLONNES */
+    gap: 40px;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 1600px;
+}
+
+.app-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    
+display: flex;
+    flex-direction: column;
+
 }
-``
+
+/* Animations */
+.app-card:nth-child(1) { animation-delay: 0.1s; }
+.app-card:nth-child(2) { animation-delay: 0.2s; }
+.app-card:nth-child(3) { animation-delay: 0.3s; }
+.app-card:nth-child(4) { animation-delay: 0.4s; }
+.app-card:nth-child(5) { animation-delay: 0.5s; }
+.app-card:nth-child(6) { animation-delay: 0.6s; }
+
+.app-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.app-card:hover::before { left: 100%; }
+
+.app-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.app-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.app-card:hover .app-icon {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.app-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.app-card p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05em;
+}
+
+.key-features {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.key-features h4 {
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+
+.learn-btn {
+    width: 100%;
+    padding: 14px 30px;
+    font-size: 1.05em;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-size: 200% 200%;
+    background-position: left center; /* position de départ */
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet RIPLE corrigé */
+.learn-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: 1;  /* <-- essentiel */
+}
+
+/* Faire apparaître la vague */
+.learn-btn:hover::before {
+    width: 280px;
+    height: 280px;
+}
+
+/* Effet de translation du gradient visible */
+.learn-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    background-position: right center; /* <-- animation visible */
+}
+
+.learn-btn span {
+    position: relative;
+    z-index: 2; /* le texte reste au-dessus du ripple */
+}
+
+
+/* MODAL — inchangé */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); z-index: 1000; overflow-y: auto; animation: fadeIn 0.3s ease; }
+
+.modal-content {
+    background: white;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 50px;
+    border-radius: 25px;
+    position: relative;
+    animation: slideInUp 0.4s ease;
+}
+
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 2.5em;
+    cursor: pointer;
+    color: #999;
+    transition: all 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #667eea;
+    transform: rotate(90deg);
+}
+
+/* TITRES / PARAGRAPHES modaux */
+
+/* Titre du modal – bleu + gras, proche de la capture */
+.modal-content h2 {
+    color: #5f79f0;           /* bleu proche de l’image */
+    font-weight: 800;         /* bien marqué */
+    font-size: 2.0em;         /* plus grand */
+    letter-spacing: 0.2px;
+    margin-bottom: 24px;
+    border: none;             /* on retire le soulignement si tu veux la même esthétique */
+    padding-bottom: 0;
+    display: flex;            /* pour aligner l’emoji et le texte */
+    align-items: center;
+    gap: 12px;
+}
+
+
+.lesson-section {
+    margin-bottom: 35px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+}
+
+.lesson-section h3 {
+    color: #667eea;
+    margin-bottom: 18px;
+    font-size: 1.6em;
+}
+
+.lesson-section ul { list-style: none; padding-left: 0; }
+.lesson-section li {
+    padding: 12px 0;
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 35px;
+}
+.lesson-section li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes slideInUp { from { transform: translateY(50px); opacity: 0;} to { transform: translateY(0); opacity: 1;} }
+
+
+.productivity-tip {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    padding: 25px 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+    border-left: 6px solid #e17055;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.productivity-tip h4 {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #d35400;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.productivity-tip h4::before {
+    content: none;
+    font-size: 1.3em;
+}
+
+.productivity-tip p {
+    font-size: 1.05em;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* --- HERO TITLE – réglages pour matcher la capture --- */
+.hero-banner h1 {
+    font-size: clamp(2.2rem, 3.8vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0.3px;
+    margin: 0 0 14px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: #fff !important;
+    text-shadow: 0 6px 22px rgba(0,0,0,0.35);
+}
+
+.hero-banner p {
+    font-size: clamp(1.05rem, 1.2vw, 1.3rem);
+    opacity: 0.95;
+}
+
+/* Emoji/icone du titre */
+.hero-emoji {
+    font-size: 1.15em;
+    transform: translateY(2px);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+
+/* Optionnel : lissage pour un rendu plus net */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Optionnel : fond un peu plus clair, proche de la capture */
+.hero-banner {
+    background: linear-gradient(135deg, #7386f2 0%, #7a6fe4 100%);
+}
+
+/* 1) Crée un contexte d’empilement propre pour chaque carte */
+.app-card {
+    position: relative;
+    isolation: isolate;   /* nouvelle pile, évite les conflits d'empilement */
+}
+
+/* 2) L’overlay visuel ne doit pas bloquer la souris et reste derrière */
+.app-card::before {
+    pointer-events: none; /* <-- clé : ne capte pas le hover/click */
+    z-index: 0;           /* derrière tout le contenu */
+}
+
+/* 3) Tout le contenu de la carte passe au-dessus de l’overlay */
+.app-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 4) Bouton : on garde tes effets + on force la position de départ du gradient */
+.learn-btn {
+    background-position: left center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 5) Ripple au-dessus du fond mais sous le texte */
+.learn-btn::before {
+    z-index: 1;
+}
+
+.learn-btn span {          /* si tu ajoutes un <span> autour du texte */
+    position: relative;
+    z-index: 2;
+}
+.benefit-item {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(102, 126, 234, 0.25);
+}
