@@ -439,7 +439,7 @@ const lessons = {
 
   document.querySelectorAll('.learn-btn').forEach(btn => {
       btn.addEventListener('click', e => {
-          e.stopPropagation();
+          /*e.stopPropagation();*/
           const app = btn.closest('.app-card').dataset.app;
           const lesson = lessons[app];
 
